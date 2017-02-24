@@ -9,6 +9,7 @@ public class CustomVerifier extends SecretVerifier {
 
   @Override
   public int verify(String identifier, char[] secret) {
+    System.out.println(String.format("Verifying secret for user %s", identifier));
     return RESULT_VALID;
   }
 }

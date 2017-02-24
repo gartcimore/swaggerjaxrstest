@@ -3,6 +3,7 @@ package org.test;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.ext.jaxrs.JaxRsApplication;
+import org.restlet.ext.swagger.JaxRsApplicationSwaggerSpecificationRestlet;
 import org.restlet.security.ChallengeAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -39,20 +40,26 @@ public class WebService {
     anotherApplication = new AnotherApplication();
 
     // create JAX-RS runtime environment
-    JaxRsApplication jaxRsApplication = new JaxRsApplication(restletComponent.getContext());
+    JaxRsApplication jaxRsApplication = new JaxRsApplication(restletComponent.getContext().createChildContext());
     jaxRsApplication.getJaxRsRestlet().addClass(CustomExceptionMapper.class);
 
 
+
     jaxRsApplication.add(oneApplication);
+    jaxRsApplication.add(anotherApplication);
+
+        JaxRsApplicationSwaggerSpecificationRestlet jaxRsApplicationSwaggerSpecificationRestlet =
+          new JaxRsApplicationSwaggerSpecificationRestlet(anotherApplication);
 
 //    jaxRsApplication.add(anotherApplication);
 
     restletComponent.getServers().add(Protocol.HTTP, port);
-    restletComponent.getDefaultHost().attach(jaxRsApplication);
+//    restletComponent.getDefaultHost().attach(jaxRsApplication);
+//    restletComponent.getDefaultHost().attach(jaxRsApplicationSwaggerSpecificationRestlet);
 
 
     challengeAuthenticator.setVerifier(myVerifier);
-    challengeAuthenticator.setNext(jaxRsApplication);
+    challengeAuthenticator.setNext(jaxRsApplicationSwaggerSpecificationRestlet);
     restletComponent.getDefaultHost().attach(challengeAuthenticator);
     restletComponent.start();
     started = true;

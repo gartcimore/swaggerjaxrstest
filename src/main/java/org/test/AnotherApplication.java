@@ -1,11 +1,11 @@
 package org.test;
 
-import org.restlet.ext.swagger.SwaggerApplication;
+import javax.ws.rs.core.Application;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class AnotherApplication extends SwaggerApplication {
+public class AnotherApplication extends Application {
 
 
   public Set<Class<?>> getClasses() {
