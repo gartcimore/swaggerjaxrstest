@@ -3,9 +3,7 @@ package org.test;
 import org.restlet.security.SecretVerifier;
 import org.springframework.stereotype.Component;
 
-/**
- * @author Laurent Rustuel
- */
+
 @Component
 public class CustomVerifier extends SecretVerifier {
 

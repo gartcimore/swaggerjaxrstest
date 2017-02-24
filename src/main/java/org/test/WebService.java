@@ -53,8 +53,7 @@ public class WebService {
 
     challengeAuthenticator.setVerifier(myVerifier);
     challengeAuthenticator.setNext(jaxRsApplication);
-    restletComponent.getDefaultHost().attach(challengeAuthenticator); //UCS-UCS-3960
-
+    restletComponent.getDefaultHost().attach(challengeAuthenticator);
     restletComponent.start();
     started = true;
   }

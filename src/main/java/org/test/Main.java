@@ -3,9 +3,6 @@ package org.test;
 import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- * @author Laurent Rustuel
- */
 public class Main {
 
   public static void main(String[] args) {
