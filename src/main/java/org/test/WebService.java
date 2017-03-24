@@ -47,9 +47,11 @@ public class WebService {
 
     jaxRsApplication.add(oneApplication);
     jaxRsApplication.add(anotherApplication);
+//    jaxRsApplication.getJaxRsRestlet().addClass(BaseExceptionMapper.class);
 
-        JaxRsApplicationSwaggerSpecificationRestlet jaxRsApplicationSwaggerSpecificationRestlet =
-          new JaxRsApplicationSwaggerSpecificationRestlet(anotherApplication);
+
+//        JaxRsApplicationSwaggerSpecificationRestlet jaxRsApplicationSwaggerSpecificationRestlet =
+//          new JaxRsApplicationSwaggerSpecificationRestlet(anotherApplication);
 
 //    jaxRsApplication.add(anotherApplication);
 
@@ -58,9 +60,11 @@ public class WebService {
 //    restletComponent.getDefaultHost().attach(jaxRsApplicationSwaggerSpecificationRestlet);
 
 
-    challengeAuthenticator.setVerifier(myVerifier);
-    challengeAuthenticator.setNext(jaxRsApplicationSwaggerSpecificationRestlet);
-    restletComponent.getDefaultHost().attach(challengeAuthenticator);
+//    challengeAuthenticator.setVerifier(myVerifier);
+//    challengeAuthenticator.setNext(jaxRsApplicationSwaggerSpecificationRestlet);
+//    challengeAuthenticator.setNext(jaxRsApplication);
+//    restletComponent.getDefaultHost().attach(challengeAuthenticator);
+    restletComponent.getDefaultHost().attach(jaxRsApplication);
     restletComponent.start();
     started = true;
   }
