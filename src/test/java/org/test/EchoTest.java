@@ -20,7 +20,7 @@ public class EchoTest {
 
 
   @Test
-  public void shouldNotHaveNullPointer() throws IOException {
+  public void shouldNotHaveNullPointerWithPut() throws IOException {
     Client client = new Client(new Context(), HTTP);
     ClientResource clientResource = new ClientResource("http://localhost:8283/echo");
     clientResource.setNext(client);
@@ -29,6 +29,18 @@ public class EchoTest {
     clientResource.put(null);
     assertThat(clientResource.getResponseEntity().getText(), is(nullValue()));
     assertThat(clientResource.getStatus().getCode(), is(204));
+  }
+
+  @Test
+  public void shouldNotHaveNullPointerWithPost() throws IOException {
+    Client client = new Client(new Context(), HTTP);
+    ClientResource clientResource = new ClientResource("http://localhost:8283/echo");
+    clientResource.setNext(client);
+    clientResource.accept(MediaType.APPLICATION_JSON);
+    //    clientResource.put(new JacksonRepresentation<>((JsonNode) null));
+    clientResource.post(null);
+    assertThat(clientResource.getResponseEntity().getText(), is(nullValue()));
+    assertThat(clientResource.getStatus().getCode(), is(200));
   }
 
 }
