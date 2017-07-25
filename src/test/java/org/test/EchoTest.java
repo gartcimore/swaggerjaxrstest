@@ -28,7 +28,7 @@ public class EchoTest {
 //    clientResource.put(new JacksonRepresentation<>((JsonNode) null));
     clientResource.put(null);
     assertThat(clientResource.getResponseEntity().getText(), is(nullValue()));
-    assertThat(clientResource.getStatus().getCode(), is(204));
+    assertThat(clientResource.getStatus().getCode(), is(500));
   }
 
   @Test
@@ -40,7 +40,7 @@ public class EchoTest {
     //    clientResource.put(new JacksonRepresentation<>((JsonNode) null));
     clientResource.post(null);
     assertThat(clientResource.getResponseEntity().getText(), is(nullValue()));
-    assertThat(clientResource.getStatus().getCode(), is(200));
+    assertThat(clientResource.getStatus().getCode(), is(500));
   }
 
 }

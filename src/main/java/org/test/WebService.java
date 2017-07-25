@@ -31,40 +31,36 @@ public class WebService {
       return;
     }
 
-    OneApplication oneApplication;
-    AnotherApplication anotherApplication;
+    HelloApplication helloApplication;
+    EchoApplication echoApplication;
 
-    oneApplication = new OneApplication();
+    helloApplication = new HelloApplication();
 
 
-    anotherApplication = new AnotherApplication();
+    echoApplication = new EchoApplication();
 
     // create JAX-RS runtime environment
     JaxRsApplication jaxRsApplication = new JaxRsApplication(restletComponent.getContext().createChildContext());
-    jaxRsApplication.getJaxRsRestlet().addClass(CustomExceptionMapper.class);
+//    jaxRsApplication.getJaxRsRestlet().addClass(CustomExceptionMapper.class);
 
 
 
-    jaxRsApplication.add(oneApplication);
-    jaxRsApplication.add(anotherApplication);
-//    jaxRsApplication.getJaxRsRestlet().addClass(BaseExceptionMapper.class);
+    jaxRsApplication.add(helloApplication);
+    jaxRsApplication.add(echoApplication);
 
+    JaxRsApplicationSwaggerSpecificationRestlet jaxRsApplicationSwaggerSpecificationRestlet =
+      new JaxRsApplicationSwaggerSpecificationRestlet(echoApplication);
 
-//        JaxRsApplicationSwaggerSpecificationRestlet jaxRsApplicationSwaggerSpecificationRestlet =
-//          new JaxRsApplicationSwaggerSpecificationRestlet(anotherApplication);
-
-//    jaxRsApplication.add(anotherApplication);
-
+    jaxRsApplicationSwaggerSpecificationRestlet.setBasePath("doc1");
     restletComponent.getServers().add(Protocol.HTTP, port);
-//    restletComponent.getDefaultHost().attach(jaxRsApplication);
-//    restletComponent.getDefaultHost().attach(jaxRsApplicationSwaggerSpecificationRestlet);
+//        restletComponent.getDefaultHost().attach(jaxRsApplication);
+        restletComponent.getDefaultHost().attach("doc",jaxRsApplicationSwaggerSpecificationRestlet);
 
 
-//    challengeAuthenticator.setVerifier(myVerifier);
+    challengeAuthenticator.setVerifier(myVerifier);
 //    challengeAuthenticator.setNext(jaxRsApplicationSwaggerSpecificationRestlet);
-//    challengeAuthenticator.setNext(jaxRsApplication);
-//    restletComponent.getDefaultHost().attach(challengeAuthenticator);
-    restletComponent.getDefaultHost().attach(jaxRsApplication);
+    challengeAuthenticator.setNext(jaxRsApplication);
+    restletComponent.getDefaultHost().attach(challengeAuthenticator);
     restletComponent.start();
     started = true;
   }
