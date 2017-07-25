@@ -51,15 +51,31 @@ public class WebService {
     JaxRsApplicationSwaggerSpecificationRestlet jaxRsApplicationSwaggerSpecificationRestlet =
       new JaxRsApplicationSwaggerSpecificationRestlet(echoApplication);
 
-    jaxRsApplicationSwaggerSpecificationRestlet.setBasePath("doc1");
     restletComponent.getServers().add(Protocol.HTTP, port);
-//        restletComponent.getDefaultHost().attach(jaxRsApplication);
-        restletComponent.getDefaultHost().attach("doc",jaxRsApplicationSwaggerSpecificationRestlet);
 
+    // access to docs on all url
+//    restletComponent.getDefaultHost().attach(jaxRsApplicationSwaggerSpecificationRestlet);
+//    restletComponent.getDefaultHost().attach(jaxRsApplication);
+//
+//    challengeAuthenticator.setVerifier(myVerifier);
+//    challengeAuthenticator.setNext(jaxRsApplicationSwaggerSpecificationRestlet);
+
+
+    // access to resources but no api doc
+//    restletComponent.getDefaultHost().attach(jaxRsApplication);
+//    restletComponent.getDefaultHost().attach(jaxRsApplicationSwaggerSpecificationRestlet);
+//
+//    challengeAuthenticator.setVerifier(myVerifier);
+//    challengeAuthenticator.setNext(jaxRsApplicationSwaggerSpecificationRestlet);
+
+
+    // access to docs on all url
+    restletComponent.getDefaultHost().attach(jaxRsApplicationSwaggerSpecificationRestlet);
+    restletComponent.getDefaultHost().attach(jaxRsApplication);
 
     challengeAuthenticator.setVerifier(myVerifier);
-//    challengeAuthenticator.setNext(jaxRsApplicationSwaggerSpecificationRestlet);
     challengeAuthenticator.setNext(jaxRsApplication);
+
     restletComponent.getDefaultHost().attach(challengeAuthenticator);
     restletComponent.start();
     started = true;
